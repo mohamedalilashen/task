@@ -8,7 +8,7 @@ use App\Models\Post;
 class PageController extends Controller
 {
     public function home(){
-        return 'hello';
+      return view('posts');
     }
     public function contact(){
         $data = 0;

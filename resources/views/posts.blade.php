@@ -47,16 +47,11 @@
 
 </form>
 
-@if($date == 0)
-
+@if(($date ?? 0) == 0)
 <div class="alert alert-danger">
   <strong>not found data!</strong>.No data at the moment
 </div>
-
-    
 @else
-
-  
 
 <table class="table table-striped">
  <thead>
@@ -70,19 +65,18 @@
  </thead>
  <tbody>
 
-
- @foreach ( $select as $sel )
-
-       <td>{{$sel['title']}}</td> 
-      <td>{{$sel['content']}}</td> 
-      <td>{{$sel['is_published']?'true':'false'}}</td> 
-      <td> <a href="{{ route('edit_page',$sel['id']) }}"><button type="button" class="btn btn-primary">edit</button></a></td>
+ @if($select->isNotEmpty())
+    @foreach($select as $sel)
+        <tr>
+            <td>{{ $sel->title }}</td>
+            <td>{{ $sel->content }}</td>
+            <td>{{ $sel->is_published ? 'true' : 'false' }}</td>
+            <td> <a href="{{ route('edit_page',$sel['id']) }}"><button type="button" class="btn btn-primary">edit</button></a></td>
       <td> <a href="{{ route('delete',$sel['id']) }}"<button type="button" class="btn btn-danger">delete</button></a></td>
- </tbody>
- @endforeach  
+        </tr>
+    @endforeach
+@endif
 </table>
- 
-
 @endif
 
 
